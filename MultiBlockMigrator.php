@@ -7,7 +7,7 @@ $thisfile=basename(__FILE__, ".php");
 register_plugin(
 	$thisfile, //Plugin id
 	'MultiBlock Migrator', 	//Plugin name
-	'1.0', 		//Plugin version
+	'2.0', 		//Plugin version
 	'Mateusz Skrzypczak',  //Plugin author
 	'', //author website
 	'This is Url Changer for MultiBlock', //Plugin description
@@ -149,12 +149,30 @@ margin-bottom:15px;
     
      
              
-    } 
+    };
+
+    $folder = GSDATAOTHERPATH.'oneBlock/**/*.{txt,json}';
+    foreach(glob($folder,GLOB_BRACE) as $file){
+
+      $old = str_replace(" ","",$_POST['old']);
+      $new = str_replace(" ","",$_POST['new']);
+
+
+        $oldcontent = file_get_contents($file);
+        $newcontent = str_replace([$old, $old.'/'],[$new, $new.'/'],$oldcontent);
+
+        
+
+        file_put_contents($file,$newcontent);
+
+ 
+         
+};
     
-    }
+    };
 
     
-  } 
+  } ;
 
  
 ?>
